@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import type { ProductParams } from "@/app/(products)/api/types";
 import {
   createTransaction,
+  deleteTransaction,
   getTransactions,
 } from "@/app/transactions/api/queries";
 import type { GetTransactionsParams } from "@/app/transactions/api/types";
@@ -61,17 +62,17 @@ export function useCreateTransaction() {
 //   });
 // }
 
-// export function useDeleteProduct() {
-//   const queryClient = useQueryClient();
+export function useDeleteTransaction() {
+  const queryClient = useQueryClient();
 
-//   return useMutation({
-//     mutationFn: (sku: string) => deleteProduct(sku),
-//     onError: (error: ApiErrorResponse) => {
-//       toast.error(error.response?.data?.message || error.message);
-//     },
-//     onSuccess: () => {
-//       toast.success("Product deleted successfully");
-//       queryClient.invalidateQueries({ queryKey: keys.getProducts });
-//     },
-//   });
-// }
+  return useMutation({
+    mutationFn: (id: number) => deleteTransaction(id),
+    onError: (error: ApiErrorResponse) => {
+      toast.error(error.response?.data?.message || error.message);
+    },
+    onSuccess: () => {
+      toast.success("Transaction deleted successfully");
+      queryClient.invalidateQueries({ queryKey: keys.getTransactions });
+    },
+  });
+}

@@ -6,6 +6,7 @@ import { CreateProductModal } from "@/app/(products)/components/create-product-m
 import { DeleteProductModal } from "@/app/(products)/components/delete-product-modal";
 import { ProductDetailModal } from "@/app/(products)/components/product-detail-modal";
 import { CreateTransactionModal } from "@/app/transactions/components/create-transaction-modal";
+import { DeleteTransactionModal } from "@/app/transactions/components/delete-transaction-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -22,6 +23,7 @@ export const ModalProvider = () => {
       <ProductDetailModal />
       <DeleteProductModal />
       <CreateTransactionModal />
+      <DeleteTransactionModal />
     </>
   );
 };

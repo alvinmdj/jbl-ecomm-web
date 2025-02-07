@@ -1,15 +1,19 @@
 import { create } from "zustand";
 
 import type { ProductResponse } from "@/app/(products)/api/types";
+import type { TransactionResponse } from "@/app/transactions/api/types";
 
 export type ModalType =
   | "createProduct"
   | "detailProduct"
   | "deleteProduct"
-  | "createTransaction";
+  | "createTransaction"
+  | "editTransaction"
+  | "deleteTransaction";
 
 interface ModalData {
   product?: ProductResponse;
+  transaction?: TransactionResponse;
 }
 
 interface ModalStore {

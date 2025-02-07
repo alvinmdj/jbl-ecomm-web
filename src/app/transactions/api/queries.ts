@@ -49,11 +49,11 @@ export const createTransaction = (
 //   });
 // };
 
-// export const deleteProduct = (
-//   sku: string,
-// ): Promise<ApiResponse<{ message: string }>> => {
-//   return request({
-//     method: "DELETE",
-//     url: `${TRANSACTION_BASE_PATH}/${sku}`,
-//   });
-// };
+export const deleteTransaction = (
+  id: number,
+): Promise<ApiResponse<{ message: string }>> => {
+  return request({
+    method: "DELETE",
+    url: `${TRANSACTION_BASE_PATH}/${id}`,
+  });
+};
