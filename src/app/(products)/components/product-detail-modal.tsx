@@ -99,7 +99,7 @@ export function ProductDetailModal() {
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent className="max-h-screen overflow-y-scroll">
         <DialogHeader>
-          <DialogTitle>Update Product</DialogTitle>
+          <DialogTitle>Product Detail</DialogTitle>
           {product && (
             <div className="relative aspect-video">
               <Image
