@@ -1,8 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 import { useCreateProduct } from "@/app/(products)/api/hooks";
+import {
+  productFormSchema,
+  type ProductFormSchema,
+} from "@/app/(products)/schema";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -19,25 +22,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { useModalStore } from "@/hooks/use-modal-store";
-
-const formSchema = z.object({
-  title: z.string().min(1, "Title must not be empty"),
-  sku: z.string().min(1, "SKU must not be empty"),
-  image: z
-    .string()
-    .min(1, "Image must not be empty")
-    .url("Image must be a valid URL"),
-  price: z
-    .string()
-    .min(1, "Price must not be empty")
-    .refine((value) => Number(value) > 0, {
-      message: "Price must be a number greater than 0",
-    }),
-  description: z.string().optional(),
-});
-
-type FormSchema = z.infer<typeof formSchema>;
 
 export function CreateProductModal() {
   const { isOpen, onClose, type } = useModalStore();
@@ -46,8 +32,8 @@ export function CreateProductModal() {
 
   const createProduct = useCreateProduct();
 
-  const form = useForm<FormSchema>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ProductFormSchema>({
+    resolver: zodResolver(productFormSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -57,7 +43,13 @@ export function CreateProductModal() {
     },
   });
 
-  function onSubmit({ title, description, image, sku, price }: FormSchema) {
+  function onSubmit({
+    title,
+    description,
+    image,
+    sku,
+    price,
+  }: ProductFormSchema) {
     createProduct.mutate({
       title,
       description,
@@ -103,7 +95,7 @@ export function CreateProductModal() {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Input placeholder="Description" {...field} />
+                    <Textarea placeholder="Description" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

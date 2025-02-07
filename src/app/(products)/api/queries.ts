@@ -33,19 +33,19 @@ export const createProduct = (
   payload: CreateProductRequest,
 ): Promise<ApiResponse<ProductDetailResponse>> => {
   return request({
-    method: "post",
+    method: "POST",
     url: PRODUCT_BASE_PATH,
     data: payload,
   });
 };
 
-// export const updateProduct = (
-//   ProductId: number,
-//   payload: UpdateProductRequest,
-// ): Promise<ApiResponse<ProductResponse>> => {
-//   return request({
-//     method: "put",
-//     url: `Products/${ProductId}`,
-//     data: payload,
-//   });
-// };
+export const updateProduct = (
+  productSKU: string,
+  payload: CreateProductRequest,
+): Promise<ApiResponse<ProductDetailResponse>> => {
+  return request({
+    method: "PUT",
+    url: `${PRODUCT_BASE_PATH}/${productSKU}`,
+    data: payload,
+  });
+};

@@ -1,3 +1,5 @@
+import type { AxiosError } from "axios";
+
 export type MetaPaginationResponse = {
   page: number;
   limit: number;
@@ -12,3 +14,5 @@ export type ApiResponse<T> = {
 export type ApiResponseWithMeta<T> = ApiResponse<T> & {
   meta: MetaPaginationResponse;
 };
+
+export type ApiErrorResponse = AxiosError<{ message: string }>;

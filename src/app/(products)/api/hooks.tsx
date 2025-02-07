@@ -9,8 +9,13 @@ import {
   createProduct,
   getProductBySKU,
   getProducts,
+  updateProduct,
 } from "@/app/(products)/api/queries";
-import type { ProductParams } from "@/app/(products)/api/types";
+import type {
+  CreateProductRequest,
+  ProductParams,
+} from "@/app/(products)/api/types";
+import type { ApiErrorResponse } from "@/types/shared";
 import { toast } from "sonner";
 
 const keys = {
@@ -48,32 +53,33 @@ export function useCreateProduct() {
 
   return useMutation({
     mutationFn: createProduct,
-    onError: (error) => {
-      toast.error(error.message);
+    onError: (error: ApiErrorResponse) => {
+      toast.error(error.response?.data?.message || error.message);
     },
     onSuccess: () => {
+      toast.success("Product created successfully");
       queryClient.invalidateQueries({ queryKey: keys.getProducts });
     },
   });
 }
 
-// export function useUpdateProduct() {
-//   const queryClient = useQueryClient();
+export function useUpdateProduct() {
+  const queryClient = useQueryClient();
 
-//   return useMutation({
-//     mutationFn: ({
-//       ProductId,
-//       payload,
-//     }: {
-//       ProductId: number;
-//       payload: UpdateProductRequest;
-//     }) => updateProduct(ProductId, payload),
-//     onError: (error) => {
-//       message.error(error.message);
-//     },
-//     onSuccess: () => {
-//       message.success("Perubahan Berhasil Tersimpan");
-//       queryClient.invalidateQueries({ queryKey: keys.getProducts });
-//     },
-//   });
-// }
+  return useMutation({
+    mutationFn: ({
+      productSKU,
+      payload,
+    }: {
+      productSKU: string;
+      payload: CreateProductRequest;
+    }) => updateProduct(productSKU, payload),
+    onError: (error: ApiErrorResponse) => {
+      toast.error(error.response?.data?.message || error.message);
+    },
+    onSuccess: () => {
+      toast.success("Product updated successfully");
+      queryClient.invalidateQueries({ queryKey: keys.getProducts });
+    },
+  });
+}
