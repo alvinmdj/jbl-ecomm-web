@@ -93,8 +93,7 @@ export function ProductDetailModal() {
         price: productDetail.data.data.price.toString(),
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productDetail.data]);
+  }, [form, productDetail.data?.data]);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>

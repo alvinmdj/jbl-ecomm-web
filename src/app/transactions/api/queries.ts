@@ -38,16 +38,16 @@ export const createTransaction = (
   });
 };
 
-// export const updateProduct = (
-//   productSKU: string,
-//   payload: CreateProductRequest,
-// ): Promise<ApiResponse<ProductDetailResponse>> => {
-//   return request({
-//     method: "PUT",
-//     url: `${TRANSACTION_BASE_PATH}/${productSKU}`,
-//     data: payload,
-//   });
-// };
+export const updateTransaction = (
+  id: number,
+  payload: CreateTransactionRequest,
+): Promise<ApiResponse<TransactionResponse>> => {
+  return request({
+    method: "PUT",
+    url: `${TRANSACTION_BASE_PATH}/${id}`,
+    data: payload,
+  });
+};
 
 export const deleteTransaction = (
   id: number,
