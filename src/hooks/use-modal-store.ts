@@ -2,7 +2,11 @@ import { create } from "zustand";
 
 import type { ProductResponse } from "@/app/(products)/api/types";
 
-export type ModalType = "createProduct" | "detailProduct" | "deleteProduct";
+export type ModalType =
+  | "createProduct"
+  | "detailProduct"
+  | "deleteProduct"
+  | "createTransaction";
 
 interface ModalData {
   product?: ProductResponse;
