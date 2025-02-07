@@ -6,6 +6,7 @@ import { ModalProvider } from "@/components/providers/modal-provider";
 import QueryProvider from "@/components/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 
+import { Navbar } from "@/components/navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,7 +35,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider>
-          <div className="mx-auto my-4 max-w-screen-lg px-4">{children}</div>
+          <div className="mx-auto my-4 max-w-screen-lg px-4">
+            <Navbar />
+            {children}
+          </div>
           <ReactQueryDevtools initialIsOpen={false} />
           <ModalProvider />
           <Toaster />
