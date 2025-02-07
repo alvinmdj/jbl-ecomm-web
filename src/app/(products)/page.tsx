@@ -4,7 +4,6 @@ import { Fragment, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { useGetProducts } from "@/app/(products)/api/hooks";
-import type { ProductResponse } from "@/app/(products)/api/types";
 import { ProductCard } from "@/app/(products)/components/product-card";
 import { Button } from "@/components/ui/button";
 import { useModalStore } from "@/hooks/use-modal-store";
@@ -25,10 +24,6 @@ export default function Home() {
     isError,
     isSuccess,
   } = useGetProducts({ page: 1, limit: 8 });
-
-  function handleViewProductDetail(product: ProductResponse) {
-    onOpen("detailProduct", { product });
-  }
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -55,7 +50,8 @@ export default function Home() {
                 <ProductCard
                   key={product.sku}
                   product={product}
-                  onClickViewDetail={() => handleViewProductDetail(product)}
+                  onClickViewDetail={() => onOpen("detailProduct", { product })}
+                  onClickDelete={() => onOpen("deleteProduct", { product })}
                 />
               ))}
             </Fragment>

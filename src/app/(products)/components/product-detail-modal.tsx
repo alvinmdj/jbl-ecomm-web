@@ -38,7 +38,9 @@ export function ProductDetailModal() {
   const isModalOpen = isOpen && type === "detailProduct";
   const { product } = data;
 
-  const productDetail = useGetProductBySKU(product?.sku || "");
+  const productDetail = useGetProductBySKU(
+    type === "detailProduct" ? product?.sku || "" : "",
+  );
 
   const updateProduct = useUpdateProduct();
 

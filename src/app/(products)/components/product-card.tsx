@@ -14,9 +14,11 @@ import {
 export function ProductCard({
   product,
   onClickViewDetail,
+  onClickDelete,
 }: {
   product: ProductResponse;
   onClickViewDetail: () => void;
+  onClickDelete: () => void;
 }) {
   return (
     <Card className="flex flex-col">
@@ -38,13 +40,20 @@ export function ProductCard({
         <p>Price: ${product.price}</p>
         <p>Stock: {product.stock}</p>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex flex-col gap-2">
         <Button
           variant="outline"
           className="w-full"
           onClick={onClickViewDetail}
         >
           View Detail
+        </Button>
+        <Button
+          variant="destructive"
+          className="w-full"
+          onClick={onClickDelete}
+        >
+          Remove
         </Button>
       </CardFooter>
     </Card>

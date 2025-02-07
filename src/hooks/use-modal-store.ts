@@ -1,7 +1,8 @@
-import type { ProductResponse } from "@/app/(products)/api/types";
 import { create } from "zustand";
 
-export type ModalType = "createProduct" | "detailProduct";
+import type { ProductResponse } from "@/app/(products)/api/types";
+
+export type ModalType = "createProduct" | "detailProduct" | "deleteProduct";
 
 interface ModalData {
   product?: ProductResponse;

@@ -49,3 +49,12 @@ export const updateProduct = (
     data: payload,
   });
 };
+
+export const deleteProduct = (
+  sku: string,
+): Promise<ApiResponse<{ message: string }>> => {
+  return request({
+    method: "DELETE",
+    url: `${PRODUCT_BASE_PATH}/${sku}`,
+  });
+};

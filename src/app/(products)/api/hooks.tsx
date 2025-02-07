@@ -7,6 +7,7 @@ import {
 
 import {
   createProduct,
+  deleteProduct,
   getProductBySKU,
   getProducts,
   updateProduct,
@@ -79,6 +80,21 @@ export function useUpdateProduct() {
     },
     onSuccess: () => {
       toast.success("Product updated successfully");
+      queryClient.invalidateQueries({ queryKey: keys.getProducts });
+    },
+  });
+}
+
+export function useDeleteProduct() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (sku: string) => deleteProduct(sku),
+    onError: (error: ApiErrorResponse) => {
+      toast.error(error.response?.data?.message || error.message);
+    },
+    onSuccess: () => {
+      toast.success("Product deleted successfully");
       queryClient.invalidateQueries({ queryKey: keys.getProducts });
     },
   });
