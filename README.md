@@ -1,6 +1,16 @@
+# Ecomm Web
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
+
+Make sure the [backend server](https://github.com/alvinmdj/jbl-ecomm-api) is running on [http://localhost:4000](http://localhost:4000).
+
+Setup env:
+
+```bash
+cp .env.example .env.local
+```
 
 Install dependencies:
 
