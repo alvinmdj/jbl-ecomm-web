@@ -47,9 +47,9 @@ export function TransactionTablePagination({
         </PaginationItem>
         <PaginationItem>
           <PaginationNext
-            aria-disabled={currentPage === totalPages}
+            aria-disabled={currentPage >= totalPages}
             className={cn(
-              currentPage === totalPages && "pointer-events-none opacity-50",
+              currentPage >= totalPages && "pointer-events-none opacity-50",
             )}
             href={
               pathname +

@@ -37,23 +37,28 @@ export function TransactionTable() {
   return (
     <>
       <Table className="relative">
-        <TableCaption className="text-start">
-          A list of recent adjustment transactions.
-        </TableCaption>
+        <TableCaption>A list of recent adjustment transactions.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>SKU</TableHead>
             <TableHead>Quantity</TableHead>
-            <TableHead>Amount</TableHead>
+            <TableHead>Amount ($)</TableHead>
             <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
+          {transactions.data?.data?.length === 0 && (
+            <TableRow>
+              <TableCell colSpan={4} className="text-center opacity-70">
+                No transactions found.
+              </TableCell>
+            </TableRow>
+          )}
           {transactions.data?.data?.map((tx) => (
             <TableRow key={tx.id}>
               <TableCell className="font-bold">{tx.sku}</TableCell>
               <TableCell>{tx.qty}</TableCell>
-              <TableCell>${tx.amount}</TableCell>
+              <TableCell>{tx.amount}</TableCell>
               <TableCell className="flex space-x-2">
                 <Button
                   size="icon"

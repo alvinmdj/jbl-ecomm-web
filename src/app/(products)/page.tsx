@@ -25,6 +25,8 @@ export default function Home() {
     isSuccess,
   } = useGetProducts({ page: 1, limit: 8 });
 
+  const isEmpty = data?.pages[0].meta.totalRecords === 0;
+
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
@@ -43,6 +45,8 @@ export default function Home() {
       <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {isLoading && <p>Loading...</p>}
 
+        {isEmpty && <p>No products found.</p>}
+
         {isSuccess &&
           data.pages.map((page) => (
             <Fragment key={page.meta.page + 1}>
@@ -58,7 +62,7 @@ export default function Home() {
           ))}
       </div>
 
-      {isSuccess && (
+      {isSuccess && !isEmpty && (
         <div className="mt-4 flex justify-center">
           <Button
             variant="secondary"
